@@ -1,11 +1,11 @@
 # Hardened-VM-Analyzer
 
-**Detect and analyze VM-hardening evasion techniques.**
+**Detect and analyze VM-hardening evasion techniques on Windows systems.**
 
 ![Architecture Diagram](architecture.png)
 
 ## Description
-Hardened-VM-Analyzer is a security tool designed to detect artifacts and discrepancies indicative of a "hardened" virtual machine—essentially detecting the techniques used to hide a virtualized environment from analysis tools. By analyzing system-level identifiers (BIOS, MAC addresses) and comparing them against expected virtual machine signatures, this tool identifies when a VM has been deliberately modified to masquerade as a physical host.
+Hardened-VM-Analyzer is a Windows-only security tool designed to detect artifacts and discrepancies indicative of a "hardened" virtual machine—essentially detecting the techniques used to hide a virtualized environment from analysis tools. By analyzing system-level identifiers (BIOS, MAC addresses) and comparing them against expected virtual machine signatures, this tool identifies when a VM has been deliberately modified to masquerade as a physical host.
 
 ## Features
 - **System Hardening Detection**: Uncovers signs of VM-hardening scripts (anti-anti-VM).
