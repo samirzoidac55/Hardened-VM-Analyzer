@@ -19,7 +19,7 @@ def compare_with_baseline(current, baseline_path):
     return "No changes detected."
 
 def main():
-    parser = argparse.ArgumentParser(description="Windows VM Assessment Tool")
+    parser = argparse.ArgumentParser(description="Hardened VM Analyzer")
     subparsers = parser.add_subparsers(dest="command")
     
     collect_parser = subparsers.add_parser("collect", help="Collect system data and analyze")

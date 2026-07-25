@@ -1,6 +1,6 @@
 def generate_text_report(findings):
     """Formats findings into a readable text report."""
-    report = "VM Assessment Report\n"
+    report = "Hardened VM Analysis Report\n"
     report += "====================\n\n"
     if not findings:
         report += "No findings.\n"
