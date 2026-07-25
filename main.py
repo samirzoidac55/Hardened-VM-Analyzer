@@ -1,18 +1,8 @@
 import argparse
 import json
 import os
-from collectors import system_info, registry, services, drivers, network
-from analyzer import Analyzer
+from analyzer import Analyzer, DetectionEngine
 from report import generate_text_report
-
-def run_collection():
-    return {
-        "system": system_info.collect(),
-        "registry": registry.collect(),
-        "services": services.collect(),
-        "drivers": drivers.collect(),
-        "network": network.collect()
-    }
 
 def compare_with_baseline(current, baseline_path):
     if not os.path.exists(baseline_path):
@@ -37,14 +27,17 @@ def main():
     args = parser.parse_args()
     
     if args.command == "collect":
-        data = run_collection()
+        # 1. Collection Phase
+        analyzer = Analyzer()
+        data = analyzer.collect_all()
         
         # Save results
         with open("results.json", "w") as f:
             json.dump(data, f, indent=4)
             
-        analyzer = Analyzer(data)
-        findings = analyzer.run()
+        # 2. Detection Phase
+        detection_engine = DetectionEngine(data)
+        findings = detection_engine.run()
         
         print(generate_text_report(findings))
         

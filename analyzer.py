@@ -1,4 +1,18 @@
+from collectors import system_info, registry, services, drivers, network
+
+# Collection Phase (as per architecture diagram)
 class Analyzer:
+    def collect_all(self):
+        return {
+            "system": system_info.collect(),
+            "registry": registry.collect(),
+            "services": services.collect(),
+            "drivers": drivers.collect(),
+            "network": network.collect()
+        }
+
+# Detection Phase (as per architecture diagram)
+class DetectionEngine:
     def __init__(self, data):
         self.data = data
         self.findings = []
