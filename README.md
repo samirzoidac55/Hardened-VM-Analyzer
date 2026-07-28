@@ -11,7 +11,7 @@ Hardened-VM-Analyzer is a Windows-only security tool designed to detect artifact
 - **System Hardening Detection**: Uncovers signs of VM-hardening scripts (anti-anti-VM).
 - **Artifact Analysis**: Validates BIOS signatures and inspects network interface MAC OUI patterns.
 - **Security Baseline**: Checks for common security misconfigurations (UAC status, risky services, driver signatures).
-- **Extensible**: Modular architecture allows for easy addition of new evasion detection heuristics.
+
 
 ## Installation
 Ensure you have Python installed. Clone the repository and run the tool directly.
