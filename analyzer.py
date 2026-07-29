@@ -1,4 +1,4 @@
-from collectors import system_info, registry, services, drivers, network, hardware_sensors
+from collectors import system_info, registry, services, drivers, network, hardware_sensors, firmware
 
 # Collection Phase (as per architecture diagram)
 class Analyzer:
@@ -9,7 +9,8 @@ class Analyzer:
             "services": services.collect(),
             "drivers": drivers.collect(),
             "network": network.collect(),
-            "hardware": hardware_sensors.collect()
+            "hardware": hardware_sensors.collect(),
+            "firmware": firmware.collect()
         }
 
 # Detection Phase (as per architecture diagram)
