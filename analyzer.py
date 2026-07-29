@@ -1,4 +1,4 @@
-from collectors import system_info, registry, services, drivers, network
+from collectors import system_info, registry, services, drivers, network, hardware_sensors
 
 # Collection Phase (as per architecture diagram)
 class Analyzer:
@@ -8,7 +8,8 @@ class Analyzer:
             "registry": registry.collect(),
             "services": services.collect(),
             "drivers": drivers.collect(),
-            "network": network.collect()
+            "network": network.collect(),
+            "hardware": hardware_sensors.collect()
         }
 
 # Detection Phase (as per architecture diagram)
@@ -24,6 +25,7 @@ class DetectionEngine:
         self._check_services()
         self._check_drivers()
         self._check_evasion_artifacts()
+        self._check_hardware_sensors()
             
         return self.findings
 
@@ -50,6 +52,16 @@ class DetectionEngine:
         
         if not found_vm_mac:
              self.findings.append({"check": "No VM-specific MAC OUI detected", "status": "WARN", "severity": "MEDIUM", "detail": "Potential hardening: MAC address spoofed or customized"})
+
+    def _check_hardware_sensors(self):
+        """Detects absence of physical hardware sensors."""
+        hw_data = self.data.get("hardware", {}).get("data", {})
+        thermal_zones = hw_data.get("thermal_zones", [])
+        
+        if not thermal_zones:
+             self.findings.append({"check": "Physical Hardware Sensors", "status": "WARN", "severity": "MEDIUM", "detail": "No thermal sensor data detected: likely virtual environment"})
+        else:
+             self.findings.append({"check": "Physical Hardware Sensors", "status": "PASS", "severity": "LOW"})
 
     def _check_uac(self):
         reg_data = self.data.get("registry", {}).get("data", {})
